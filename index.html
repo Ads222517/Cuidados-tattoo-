@@ -277,7 +277,7 @@
                             headers: { 'Content-Type': 'application/json' },
                             body: JSON.stringify(payload)
                         });
-                        const result = await response.json();
+                        const result = await response.json(); // Adicionado 'await' aqui
 
                         if (result.candidates && result.candidates.length > 0 &&
                             result.candidates[0].content && result.candidates[0].content.parts &&
@@ -297,4 +297,23 @@
             });
         });
 
-        // Close modal when clos
+        // Close modal when close button is clicked
+        closeModalButton.addEventListener('click', hideModal);
+
+        // Close modal when clicking outside the modal content
+        infoModal.addEventListener('click', (e) => {
+            if (e.target === infoModal) {
+                hideModal();
+            }
+        });
+
+        // Close modal when Escape key is pressed
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && !infoModal.classList.contains('hidden')) {
+                hideModal();
+            }
+        });
+
+    </script>
+</body>
+</html>
