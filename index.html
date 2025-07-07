@@ -3,306 +3,216 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cuidados Pós-Tatuagem - Estúdio Célio Santos</title>
+    <title>Cuidados Pós-Tattoo</title>
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- Font Awesome for icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <!-- Google Fonts - Inter -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
     <style>
         body {
-            font-family: 'Inter', sans-serif;
-            background-color: #1a1a1a; /* Dark background for Mad Max/Viking feel */
-            color: #e0e0e0; /* Light text for contrast */
-            /* Subtle dark pattern inspired by ancient textures or distressed surfaces */
-            background-image: url("data:image/svg+xml,%3Csvg width='6' height='6' viewBox='0 0 6 6' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%232a2a2a' fill-opacity='0.4' fill-rule='evenodd'%3E%3Cpath d='M5 0h1L0 6V5zM6 5v1H0V0z'/%3E%3C/g%3E%3C/svg%3E");
+            font-family: "Inter", sans-serif;
+            background-color: #1a1a1a; /* Preto */
+            color: #f5f5f5; /* Quase branco para o texto */
         }
-        /* Custom scrollbar for better aesthetics */
-        ::-webkit-scrollbar {
-            width: 8px;
+        .container {
+            max-width: 900px;
         }
-        ::-webkit-scrollbar-track {
-            background: #1a1a1a;
+        .icon-card {
+            background-color: #333; /* Cinza escuro para os cards */
+            transition: transform 0.2s, box-shadow 0.2s;
+            cursor: pointer;
         }
-        ::-webkit-scrollbar-thumb {
-            background: #4a4a4a;
-            border-radius: 4px;
+        .icon-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
         }
-        ::-webkit-scrollbar-thumb:hover {
-            background: #6a6a6a;
+        .modal {
+            background-color: rgba(0, 0, 0, 0.8);
         }
-        .modal-overlay {
-            background-color: rgba(0, 0, 0, 0.85); /* Darker overlay for immersive feel */
+        .modal-content {
+            background-color: #1a1a1a;
+            max-height: 80vh;
+            overflow-y: auto;
         }
-        .card-gradient {
-            background: linear-gradient(135deg, #2c2c2c 0%, #3a3a3a 100%); /* Darker, rugged gradient for cards */
-            border: 1px solid #4a4a4a; /* Subtle border */
-            color: #e0e0e0;
-            transition: all 0.3s ease; /* Smooth transition for hover effects */
+        .header-title {
+            color: #FFD700; /* Amarelo ouro para o título principal */
         }
-        .card-gradient:hover {
-            background: linear-gradient(135deg, #3a3a3a 0%, #4c4c4c 100%);
-            transform: translateY(-5px); /* Lift effect on hover */
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.4); /* Stronger shadow */
-        }
-        .btn-primary {
-            background-color: #d97706; /* Rusty orange for Mad Max feel */
-            transition: background-color 0.3s ease, transform 0.2s ease;
-        }
-        .btn-primary:hover {
-            background-color: #f59e0b; /* Lighter orange on hover */
-            transform: translateY(-2px);
-        }
-        .header-bg {
-            background: linear-gradient(90deg, #1a1a1a 0%, #3a3a3a 50%, #1a1a1a 100%); /* Dark gradient header */
-            border-bottom: 2px solid #d97706; /* Orange accent for a touch of grit */
-        }
-        .footer-bg {
-            background: linear-gradient(90deg, #1a1a1a 0%, #3a3a3a 50%, #1a1a1a 100%); /* Dark gradient footer */
-            border-top: 2px solid #d97706; /* Orange accent */
-        }
-        /* Custom icon background colors to match the theme */
-        .icon-bg-blue { background-color: #2a6f97; color: #a0c4e2; } /* Muted blue, hinting at Nordic seas/sky */
-        .icon-bg-green { background-color: #3b7b4a; color: #b7e4c7; } /* Muted green, earthy tones */
-        .icon-bg-purple { background-color: #6a4c93; color: #d0bdf4; } /* Muted purple, a touch of mystic/futuristic */
-        .icon-bg-yellow { background-color: #a87e22; color: #f7d08a; } /* Muted gold/yellow, ancient artifacts */
-        .icon-bg-red { background-color: #8c2f3c; color: #f08080; } /* Muted red, distress/warning */
-        .icon-bg-orange { background-color: #d97706; color: #f59e0b; } /* Rusty orange, Mad Max aesthetics */
-        .icon-bg-indigo { background-color: #4f46e5; color: #c7d2fe; } /* Modern indigo, current day tech */
-
-        /* Specific styles for modal content to ensure readability on dark background */
-        #modalContent p {
-            color: #c0c0c0; /* Lighter grey for modal text */
-        }
-        #modalTitle {
-            color: #f59e0b; /* Orange for modal title, standing out */
+        .section-title {
+            color: #FFD700; /* Amarelo ouro para os títulos das seções */
         }
     </style>
 </head>
-<body class="min-h-screen flex flex-col">
-
-    <!-- Header Section -->
-    <header class="header-bg shadow-md py-6 px-4 md:px-8 lg:px-16 rounded-b-xl">
-        <div class="container mx-auto flex flex-col md:flex-row justify-between items-center">
-            <h1 class="text-3xl md:text-4xl font-bold text-gray-100 mb-4 md:mb-0 text-shadow-md">ESTÚDIO CÉLIO SANTOS</h1>
-            <p class="text-lg md:text-xl text-gray-300 font-semibold text-center md:text-right">
-                CLIQUE NOS ÍCONES PARA SABER MAIS
-            </p>
+<body class="flex flex-col min-h-screen">
+    <header class="bg-black shadow-lg py-6">
+        <div class="container mx-auto px-4 text-center">
+            <h1 class="text-4xl font-bold header-title rounded-lg p-2">Cuidados Pós-Tattoo</h1>
+            <p class="text-lg text-gray-400 mt-2">Tatuando histórias, registrando emoções...</p>
         </div>
     </header>
 
-    <!-- Main Content Section - Cards Grid -->
-    <main class="flex-grow container mx-auto px-4 py-8 md:py-12 lg:py-16">
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
-
-            <!-- Card 1: Que fazer assim que sair do estúdio -->
-            <div class="card-gradient p-6 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 cursor-pointer flex flex-col items-center text-center" data-title="O Que Fazer Ao Sair do Estúdio" data-content-key="afterLeavingStudio">
-                <div class="icon-bg-blue rounded-full p-4 mb-4">
-                    <i class="fas fa-hand-sparkles text-3xl"></i>
+    <main class="flex-grow container mx-auto px-4 py-8">
+        <section class="mb-12">
+            <h2 class="text-3xl font-semibold text-center mb-8 section-title">Orientações Importantes</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Card 1: Cuidados Iniciais -->
+                <div class="icon-card p-6 rounded-xl shadow-lg flex flex-col items-center text-center" data-content-id="initial-care">
+                    <i class="fas fa-hand-sparkles text-5xl text-yellow-400 mb-4"></i>
+                    <h3 class="text-xl font-semibold mb-2 text-white">Cuidados Iniciais</h3>
+                    <p class="text-gray-300 text-sm">O que fazer nos primeiros dias.</p>
                 </div>
-                <h2 class="text-xl font-semibold mb-2">O Que Fazer Ao Sair do Estúdio</h2>
-                <p class="text-gray-400">Instruções iniciais para os primeiros momentos após a tatuagem.</p>
-            </div>
 
-            <!-- Card 2: Como higienizar a sua tattoo -->
-            <div class="card-gradient p-6 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 cursor-pointer flex flex-col items-center text-center" data-title="Como Higienizar Sua Tatuagem" data-content-key="howToClean">
-                <div class="icon-bg-green rounded-full p-4 mb-4">
-                    <i class="fas fa-soap text-3xl"></i>
+                <!-- Card 2: O Que Evitar -->
+                <div class="icon-card p-6 rounded-xl shadow-lg flex flex-col items-center text-center" data-content-id="what-to-avoid">
+                    <i class="fas fa-ban text-5xl text-yellow-400 mb-4"></i>
+                    <h3 class="text-xl font-semibold mb-2 text-white">O Que Evitar</h3>
+                    <p class="text-gray-300 text-sm">Atitudes e ambientes a serem evitados.</p>
                 </div>
-                <h2 class="text-xl font-semibold mb-2">Como Higienizar Sua Tatuagem</h2>
-                <p class="text-gray-400">Passo a passo para a limpeza adequada da sua nova tattoo.</p>
-            </div>
 
-            <!-- Card 3: Outros cuidados importantes -->
-            <div class="card-gradient p-6 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 cursor-pointer flex flex-col items-center text-center" data-title="Outros Cuidados Importantes" data-content-key="otherCare">
-                <div class="icon-bg-purple rounded-full p-4 mb-4">
-                    <i class="fas fa-heartbeat text-3xl"></i>
+                <!-- Card 3: Garantia de Retoque -->
+                <div class="icon-card p-6 rounded-xl shadow-lg flex flex-col items-center text-center" data-content-id="retouch-guarantee">
+                    <i class="fas fa-redo-alt text-5xl text-yellow-400 mb-4"></i>
+                    <h3 class="text-xl font-semibold mb-2 text-white">Garantia de Retoque</h3>
+                    <p class="text-gray-300 text-sm">Condições para o retoque gratuito.</p>
                 </div>
-                <h2 class="text-xl font-semibold mb-2">Outros Cuidados Importantes</h2>
-                <p class="text-gray-400">Dicas adicionais para garantir uma boa cicatrização.</p>
-            </div>
 
-            <!-- Card 4: Precauções com alimentação -->
-            <div class="card-gradient p-6 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 cursor-pointer flex flex-col items-center text-center" data-title="Precauções com Alimentação" data-content-key="foodPrecautions">
-                <div class="icon-bg-yellow rounded-full p-4 mb-4">
-                    <i class="fas fa-apple-alt text-3xl"></i>
+                <!-- Card 4: Higienização e Banho -->
+                <div class="icon-card p-6 rounded-xl shadow-lg flex flex-col items-center text-center" data-content-id="hygiene-bath">
+                    <i class="fas fa-bath text-5xl text-yellow-400 mb-4"></i>
+                    <h3 class="text-xl font-semibold mb-2 text-white">Higienização e Banho</h3>
+                    <p class="text-gray-300 text-sm">Orientações para a limpeza da tattoo.</p>
                 </div>
-                <h2 class="text-xl font-semibold mb-2">Precauções com Alimentação</h2>
-                <p class="text-gray-400">Alimentos a evitar e a preferir durante o processo de cicatrização.</p>
-            </div>
 
-            <!-- Card 5: Como ter direito a garantia de retoque -->
-            <div class="card-gradient p-6 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 cursor-pointer flex flex-col items-center text-center" data-title="Garantia de Retoque" data-content-key="retouchGuarantee">
-                <div class="icon-bg-red rounded-full p-4 mb-4">
-                    <i class="fas fa-paint-brush text-3xl"></i>
+                <!-- Card 5: Alimentação -->
+                <div class="icon-card p-6 rounded-xl shadow-lg flex flex-col items-center text-center" data-content-id="diet">
+                    <i class="fas fa-apple-alt text-5xl text-yellow-400 mb-4"></i>
+                    <h3 class="text-xl font-semibold mb-2 text-white">Alimentação</h3>
+                    <p class="text-gray-300 text-sm">Dicas sobre o que comer e evitar.</p>
                 </div>
-                <h2 class="text-xl font-semibold mb-2">Garantia de Retoque</h2>
-                <p class="text-gray-400">Saiba como funciona e quais as condições para o retoque gratuito.</p>
-            </div>
 
-            <!-- Card 6: Nos avalie no Google -->
-            <div class="card-gradient p-6 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 cursor-pointer flex flex-col items-center text-center" data-title="Nos Avalie no Google" data-content-key="googleReview">
-                <div class="icon-bg-orange rounded-full p-4 mb-4">
-                    <i class="fas fa-star text-3xl"></i>
+                <!-- Card 6: Contato e Redes Sociais -->
+                <div class="icon-card p-6 rounded-xl shadow-lg flex flex-col items-center text-center" data-content-id="contact-social">
+                    <i class="fas fa-share-alt text-5xl text-yellow-400 mb-4"></i>
+                    <h3 class="text-xl font-semibold mb-2 text-white">Contato & Redes Sociais</h3>
+                    <p class="text-gray-300 text-sm">Fale conosco e siga-nos!</p>
                 </div>
-                <h2 class="text-xl font-semibold mb-2">Nos Avalie no Google</h2>
-                <p class="text-gray-400">Sua opinião é muito importante! Ajude-nos a melhorar.</p>
-                <p class="text-2xl font-bold text-orange-500 mt-2">5.0 RATING</p>
-            </div>
 
-            <!-- Card 7: Deixe seu feedback -->
-            <div class="card-gradient p-6 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 cursor-pointer flex flex-col items-center text-center" data-title="Deixe Seu Feedback" data-content-key="leaveFeedback">
-                <div class="icon-bg-indigo rounded-full p-4 mb-4">
-                    <i class="fas fa-comment-alt text-3xl"></i>
+                <!-- Card 7: Avaliação Google -->
+                <div class="icon-card p-6 rounded-xl shadow-lg flex flex-col items-center text-center" data-content-id="google-review">
+                    <i class="fab fa-google text-5xl text-yellow-400 mb-4"></i>
+                    <h3 class="text-xl font-semibold mb-2 text-white">Avaliação no Google</h3>
+                    <p class="text-gray-300 text-sm">Deixe sua opinião e ajude-nos!</p>
                 </div>
-                <h2 class="text-xl font-semibold mb-2">Deixe Seu Feedback</h2>
-                <p class="text-gray-400">Compartilhe sua experiência conosco.</p>
             </div>
-
-        </div>
+        </section>
     </main>
 
-    <!-- Footer Section -->
-    <footer class="footer-bg text-white py-6 px-4 md:px-8 lg:px-16 mt-8 rounded-t-xl">
-        <div class="container mx-auto text-center">
-            <p class="text-xl font-bold mb-2">ESTÚDIO CÉLIO SANTOS</p>
-            <p class="text-sm text-gray-400">&copy; 2025 Todos os direitos reservados.</p>
-        </div>
-    </footer>
-
-    <!-- Modal for displaying detailed content -->
-    <div id="infoModal" class="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-70 hidden modal-overlay">
-        <div class="bg-gray-800 p-6 md:p-8 rounded-xl shadow-2xl max-w-lg w-11/12 max-h-[90vh] overflow-y-auto relative border border-gray-600">
+    <!-- Modal para exibir o conteúdo -->
+    <div id="modal" class="modal fixed inset-0 flex items-center justify-center p-4 hidden">
+        <div class="modal-content relative w-full rounded-xl shadow-xl p-8 max-w-2xl">
             <button id="closeModal" class="absolute top-4 right-4 text-gray-400 hover:text-white text-3xl font-bold">&times;</button>
-            <h3 id="modalTitle" class="text-2xl md:text-3xl font-bold text-orange-500 mb-4"></h3>
-            <div id="modalContent" class="text-gray-300 leading-relaxed text-base md:text-lg">
-                <!-- Content will be loaded here dynamically -->
-                <p>Carregando informações...</p>
-            </div>
-            <div id="loadingIndicator" class="text-center mt-4 hidden">
-                <i class="fas fa-spinner fa-spin text-orange-500 text-2xl"></i>
-                <p class="text-orange-500 mt-2">Gerando conteúdo...</p>
-            </div>
+            <h2 id="modalTitle" class="text-3xl font-semibold mb-4 section-title"></h2>
+            <div id="modalBody" class="text-gray-200 text-lg leading-relaxed"></div>
         </div>
     </div>
 
-    <script type="module">
-        // Initialize Firebase and Firestore (placeholders for now)
-        // These global variables are provided by the Canvas environment
-        const appId = typeof __app_id !== 'undefined' ? __app_id : 'default-app-id';
-        const firebaseConfig = typeof __firebase_config !== 'undefined' ? JSON.parse(__firebase_config) : {};
-        const initialAuthToken = typeof __initial_auth_token !== 'undefined' ? __initial_auth_token : null;
+    <footer class="bg-black shadow-inner py-6 mt-auto">
+        <div class="container mx-auto px-4 text-center text-gray-500">
+            <p>&copy; 2024 Estúdio Célio Santos. Todos os direitos reservados.</p>
+        </div>
+    </footer>
 
-        // Mock content for the modal (replace with actual content or API calls)
-        const mockContent = {
-            afterLeavingStudio: `
-                <p>Após a aplicação do filme hidrossolúvel na tatuagem, ele secara se tornando uma película em cima da tattoo, permaneça com ele por 24h.</p>
-                <p class="mt-4">Como o filme é hidrossolúvel antes de completar as 24h NÃO lave a região.</p>
-                <p class="mt-4">Completou as 24h? Então chegou a hora de retirar o filme solúvel da tattoo. Você pode observar que ele já está com umas "pontinhas" soltas e por mais que a tentação seja grande evite puxá-las.</p>
-                <p class="mt-4">Para retirar o filme solúvel de forma correta e sem machucar a tattoo, lave a região na água corrente e assim que o filme for dissolvendo pode massagear a tattoo com a mão limpa em baixo d'água para tirar o restante do produto.</p>
-            `,
-            howToClean: `
-                <p>É necessário manter a tattoo sempre limpa e hidratada para uma boa cicatrização.</p>
-                <p class="mt-4">Para manter a hidratação da tattoo, aplique 4 vezes ao dia o restaurador dérmico (à venda no estúdio) ou a vaselina sólida sem petrolato. A vaselina sólida cria uma camada protetora que ajuda na hidratação e cicatrização.</p>
-                <p class="mt-4">Na hora do banho o cuidado é crucial: lave a região tatuada com sabão líquido ou sabonete em barra (caso use o sabonete em barra, use exclusivamente para a tattoo) e água em abundância, de morna para fria.</p>
-                <p class="mt-4">Depois do banho, seque a região com um papel toalha, não arraste o papel sobre a pele, seque dando leves batidinhas e assim que terminar de secar, hidrate!</p>
-            `,
-            otherCare: `
-                <p>Evitar exposição ao sol.</p>
-                <p class="mt-4">Evitar entrar em piscinas, mar e saunas.</p>
-                <p class="mt-4">NÃO passar a mão suja na tatuagem.</p>
-                <p class="mt-4">Não coçar.</p>
-                <p class="mt-4">NÃO tirar as casquinhas.</p>
-            `,
-            foodPrecautions: `
-                <p>Uma alimentação saudável é essencial para uma boa cicatrização.</p>
-                <p class="mt-4">Evite excesso de:</p>
-                <ul class="list-disc pl-5 mt-2">
-                    <li>Alimentos remosos.</li>
-                    <li>Bebidas alcoólicas.</li>
-                    <li>Como carne de porco, frutos do mar, entre outros.</li>
-                </ul>
-                <p class="mt-4">Como saber se estou exagerando?</p>
-                <p class="mt-2">Diminua a ingestão comum destes alimentos e bebida. Por exemplo: se normalmente come 2 pedaços de carne, coma 1.</p>
-                <p class="mt-4">O bom senso cabe em cada bolso.</p>
-            `,
-            retouchGuarantee: `
-                <p>O que é a garantia de retoque?</p>
-                <p class="mt-4">Após 30 dias de cicatrização da sua tattoo, você tem a possibilidade de realizar um retoque gratuito (caso seja necessário).</p>
-                <p class="mt-4">Para ter direito à garantia é crucial que possamos acompanhar o processo de cicatrização.</p>
-                <p class="mt-4">Ao final do dia, depois da higienização da região tatuada e antes de hidratá-la, envie para o nosso WhatsApp (41)3589-2425 uma foto bem iluminada da tattoo.</p>
-                <p class="mt-4">Repita esse processo durante os três primeiros dias de cicatrização.</p>
-                <p class="mt-4 font-bold text-red-400">Sem o envio das fotos não há garantia de retoque gratuito.</p>
-            `,
-            googleReview: `
-                <p>Sua avaliação no Google é muito importante para nós! Ela nos ajuda a crescer, aprimorar nossos serviços e alcançar mais pessoas que buscam um trabalho de qualidade e um atendimento de excelência.</p>
-                <p class="mt-4">Para nos avaliar, basta procurar por "Estúdio Célio Santos" no Google e clicar em "Escrever uma avaliação". Sua opinião faz a diferença!</p>
-                <a href="https://g.page/celiosantos-tattoo/review?rc" target="_blank" class="block mt-6 btn-primary text-white py-3 px-6 rounded-lg font-semibold text-center hover:bg-blue-600 transition-colors duration-300">Avalie-nos no Google!</a>
-            `,
-            leaveFeedback: `
-                <p>Seu feedback é valioso para o Estúdio Célio Santos. Queremos saber sobre sua experiência, o que você mais gostou e onde podemos melhorar. Seja um elogio, uma sugestão ou uma crítica construtiva, estamos abertos a ouvir.</p>
-                <p class="mt-4">Você pode nos enviar seu feedback diretamente através do nosso site (link fictício) ou por mensagem em nossas redes sociais. Sua contribuição nos ajuda a oferecer um serviço cada vez melhor!</p>
-                <button onclick="alert('Funcionalidade de feedback em construção!')" class="block mt-6 btn-primary text-white py-3 px-6 rounded-lg font-semibold text-center hover:bg-blue-600 transition-colors duration-300">Enviar Feedback</button>
-            `
+    <script>
+        // Conteúdo para cada seção
+        const content = {
+            'initial-care': {
+                title: 'Cuidados Iniciais',
+                body: `
+                    <p class="mb-4">Nos <strong>três primeiros dias</strong>, faça uso da <strong>vaselina sólida</strong>, higienizando a tatuagem pelo menos <strong>três vezes ao dia</strong>.</p>
+                    <p class="mb-4"><strong>A partir do quarto dia</strong>, você pode usar um <strong>restaurador dérmico com D-pantenol</strong> ou uma <strong>pomada cicatrizante com carga de D-pantenol</strong>.</p>
+                    <p class="mb-4"><strong>Não utilize filme de PVC</strong>, pois ele aquece a pele, deixa-a úmida e sem ventilação, criando um ambiente propício para a proliferação de colônias de bactérias.</p>
+                `
+            },
+            'what-to-avoid': {
+                title: 'O Que Evitar',
+                body: `
+                    <ul class="list-disc list-inside space-y-2">
+                        <li>Evite coçar ou retirar casquinhas.</li>
+                        <li>Não entre em mar, piscina, sauna ou academia.</li>
+                        <li>Evite exposição direta ao sol.</li>
+                        <li>Evite alimentos inflamatórios (ex: carne de porco, frutos do mar, alimentos muito gordurosos ou processados).</li>
+                    </ul>
+                `
+            },
+            'retouch-guarantee': {
+                title: 'Garantia de Retoque',
+                body: `
+                    <p class="mb-4">Você tem direito a <strong>1 retoque gratuito dentro de 60 dias</strong> após a realização da tatuagem.</p>
+                    <p class="mb-4">Este retoque é válido <strong>somente se os cuidados foram seguidos corretamente</strong>.</p>
+                    <p>Fora do prazo ou por descuido, o retoque será cobrado.</p>
+                `
+            },
+            'hygiene-bath': {
+                title: 'Higienização e Banho',
+                body: `
+                    <p class="mb-4">Ao sair do estúdio, remova o curativo após <strong>2 a 3 horas</strong>.</p>
+                    <p class="mb-4">Lave a tatuagem com <strong>água fria ou morna e sabonete neutro</strong>.</p>
+                    <p class="mb-4">Seque com <strong>papel toalha</strong>, dando leves batidinhas, <strong>sem esfregar</strong>.</p>
+                    <p>O banho pode ser normal, mas evite deixar a tatuagem de molho por muito tempo.</p>
+                `
+            },
+            'diet': {
+                title: 'Alimentação',
+                body: `
+                    <p class="mb-4">Mantenha uma alimentação saudável para auxiliar na cicatrização.</p>
+                    <p>Evite alimentos inflamatórios como carne de porco, frutos do mar, alimentos muito gordurosos ou processados durante o período de cicatrização.</p>
+                `
+            },
+            'contact-social': {
+                title: 'Contato & Redes Sociais',
+                body: `
+                    <p class="mb-4"><strong>WhatsApp:</strong> <a href="https://wa.me/5541991027486" target="_blank" class="text-yellow-400 hover:underline">+55 41 99102-7486</a></p>
+                    <p class="mb-4"><strong>Instagram:</strong> <a href="https://www.instagram.com/estudioceliosantos" target="_blank" class="text-yellow-400 hover:underline">@estudioceliosantos</a></p>
+                `
+            },
+            'google-review': {
+                title: 'Avaliação no Google',
+                body: `
+                    <p class="mb-4">Sua opinião é muito importante para nós! Ajude-nos a crescer deixando sua avaliação no Google.</p>
+                    <p><a href="https://g.page/r/CcGOY6LhcYI0EAl/review" target="_blank" class="text-yellow-400 hover:underline font-bold">Clique aqui para avaliar no Google</a></p>
+                `
+            }
         };
 
-        const infoModal = document.getElementById('infoModal');
-        const closeModalButton = document.getElementById('closeModal');
+        const iconCards = document.querySelectorAll('.icon-card');
+        const modal = document.getElementById('modal');
+        const closeModalBtn = document.getElementById('closeModal');
         const modalTitle = document.getElementById('modalTitle');
-        const modalContent = document.getElementById('modalContent');
-        const loadingIndicator = document.getElementById('loadingIndicator');
-        const cards = document.querySelectorAll('.card-gradient'); // Mantido .card-gradient conforme o HTML fornecido
+        const modalBody = document.getElementById('modalBody');
 
-        // Function to show the modal
-        function showModal() {
-            infoModal.classList.remove('hidden');
-            infoModal.classList.add('flex');
-            document.body.style.overflow = 'hidden'; // Prevent scrolling on body
-        }
+        // Adiciona evento de clique a cada card
+        iconCards.forEach(card => {
+            card.addEventListener('click', () => {
+                const contentId = card.dataset.contentId;
+                const selectedContent = content[contentId];
 
-        // Function to hide the modal
-        function hideModal() {
-            infoModal.classList.add('hidden');
-            infoModal.classList.remove('flex');
-            document.body.style.overflow = ''; // Restore scrolling on body
-        }
+                if (selectedContent) {
+                    modalTitle.innerHTML = selectedContent.title;
+                    modalBody.innerHTML = selectedContent.body;
+                    modal.classList.remove('hidden'); // Exibe o modal
+                }
+            });
+        });
 
-        // Add event listeners to each card
-        cards.forEach(card => {
-            card.addEventListener('click', async () => {
-                console.log('Card clicado:', card.dataset.title); // MENSAGEM DE DEBUG AQUI!
-                const title = card.dataset.title;
-                const contentKey = card.dataset.contentKey;
+        // Fecha o modal ao clicar no botão de fechar ou fora do conteúdo
+        closeModalBtn.addEventListener('click', () => {
+            modal.classList.add('hidden');
+        });
 
-                modalTitle.textContent = title;
-                modalContent.innerHTML = '<p>Carregando informações...</p>'; // Show loading message
-                loadingIndicator.classList.remove('hidden'); // Show spinner
-                showModal();
-
-                try {
-                    // Check if content exists in mockContent first
-                    if (mockContent[contentKey]) {
-                        modalContent.innerHTML = mockContent[contentKey];
-                    } else {
-                        // If not in mockContent, try to generate using Gemini API
-                        let chatHistory = [];
-                        chatHistory.push({ role: "user", parts: [{ text: `Gere um parágrafo detalhado sobre "${title}" para um cliente de tatuagem, focando em cuidados e dicas. Use um tom amigável e informativo.` }] });
-                        const payload = { contents: chatHistory };
-                        const apiKey = ""; // If you want to use models other than gemini-2.0-flash or imagen-3.0-generate-002, provide an API key here. Otherwise, leave this as-is.
-                        const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${apiKey}`;
-
-                        const response = await fetch(apiUrl, {
-                            method: 'POST',
-                            headers: { 'Content-Type': 'application/json' },
-                            body: JSON.stringify(payload)
-                        });
-                        const result = await response.json(); // Adicionado 'await' aqui
-
-                        if (result.candidates && result.candidates.length > 0 &&
-                            result.candidates[0].content && result.candidates[0].content.parts &&
-                            result.candidates[0].content.parts.length > 0) {
-                            const generatedText = result.candidates[0].content.parts[0].text;
-                            modalContent.innerHTML = `<p>${generatedText}</p>`;
-                        } else {
-                            modal
+        modal.addEventListener('click', (e) => {
+            if (e.target === modal) {
+                modal.classList.add('hidden');
+            }
+        });
+    </script>
+</body>
+</html>
